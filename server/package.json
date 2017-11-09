@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "web server for the Haver-Lost-and-Found project",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hc-fig/Haver-Lost-and-Found.git"
+  },
+  "author": "Pablo Thiel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hc-fig/Haver-Lost-and-Found/issues"
+  },
+  "homepage": "https://github.com/hc-fig/Haver-Lost-and-Found#readme",
+  "dependencies": {
+    "formidable": "^1.1.1"
+  }
+}
