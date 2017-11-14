@@ -1,1 +1,3 @@
-{ smaller_field: 'Test', larger_field: 'nice' }
+{ smaller_field: 'test', larger_field: 'bigger test' }{ smaller_field: 'test', larger_field: 'bigger test' }{ smaller_field: 'test', larger_field: 'bigger test' }{ smaller_field: 'test', larger_field: 'test' }{ smaller_field: 'another test submit',
+  larger_field: 'testttttt\r\n' }{ smaller_field: 'another test submit',
+  larger_field: 'testttttt\r\n' }
