@@ -1,33 +1,43 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!--        <script src="my_jquery_functions.js"></script>-->
+<!--                <script src="my_jquery_functions.js"></script>-->
         <script>
             $(document).ready(function(){
                 $("button").click(function(){
-                    $("form").hide();
-                });
-
-                $("body").click(function(){
-                    $("form").hide();
+                    // RUN KADAN'S PROGRAM WITH THE SEARCH STRING AS INPUT (possibly data file as input too), OUTPUT JSON OBJECT GETS NAMED "result"
+                    $("div.search_results").replaceWith("<p>[placeholder for searched post!]</p>");
                 });
             });
         </script>
+        
     </head>
     <body>
-        <p>Welcome! Please, write something in one of our lovely fields:</p>
-        <button>Click me</button>
+        <h2>Welcome to Haver Lost and Found!</h2>
+        <br>
+        <h3>Search for an item:</h3>
+        <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." />
+        <button>Search</button>
+        <div class="search_results">
+        <br> <!-- this will be replaced by a post display when the user clicks the search button-->
+        </div>
+        <br><br>
+        <h3>Fill out a new lost post form:</h3>
         <form action="" method="post" enctype="multipart/form-data">
             <fieldset>
-                <label for="smaller_field">A nice field:</label>
+                <label for="username">Username:</label>
                 <br>
-                <input type="text" id="smaller_field" name="smaller_field" placeholder="You can type stuff in here" />
+                <input type="text" id="username" name="username" placeholder="Enter your username" />
                 <br><br>
-                <label for="larger_field">A larger description field:</label>
+                <label for="item_name">Item name:</label>
                 <br>
-                <textarea id="larger_field" name="larger_field" placeholder="You can type in here too"></textarea>
+                <input type="text" id="item_name" name="item_name" placeholder="What did you lose?" />
                 <br><br>
-                <input type="submit" value="I'm a submission button" />
+                <label for="description">Item description:</label>
+                <br>
+                <textarea id="description" name="description" placeholder="Describe the item"></textarea>
+                <br><br>
+                <input type="submit" value="Submit new lost and found post!" />
             </fieldset>
         </form>
     </body>
