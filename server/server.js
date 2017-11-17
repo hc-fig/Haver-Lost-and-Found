@@ -36,11 +36,11 @@ function processForm(req, res) {
 		}
 		else {
 			// here we write the info from the form into a file
-			fs.appendFile("DATA/user-input-data.json", util.inspect(fields), function(err) {
+		    fs.appendFile("DATA/user-input-data.json", JSON.stringify(fields), function(err) {
 				if(err) {
-					return console.log(err)
+				    return console.log(err);
 				}
-			});
+		    });
 		}
 		displayPage(res); // display the main page again
 		
