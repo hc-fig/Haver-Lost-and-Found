@@ -3,6 +3,7 @@ var url = require('url');
 var fs = require('fs');
 var formidable = require('formidable');
 var util = require('util');
+var searcher = require('./searcher.js');
 
 
 var server = http.createServer(function (req, res) {
@@ -31,12 +32,13 @@ function processForm(req, res) {
 	var form = new formidable.IncomingForm();
 	
 	form.parse(req, function (err, fields, files) {
-		if (util.inspect(fields).username == "" || util.inspect(fields).item_name == "") {  // ***MAKE THIS LINE WORK! MAYBE UTIL.INSPECT RETURNS A STRING?***
+		if (fields.username == "" || fields.item_name == "") {  // ***MAKE THIS LINE WORK! MAYBE UTIL.INSPECT RETURNS A STRING?***
 			// ***TELL THE USER THEY NEED A USERNAME AND ITEM NAME***
+			console.log("It works!");
 		}
 		else {
 			// here we write the info from the form into a file
-		    fs.appendFile("DATA/user-input-data.json", JSON.stringify(fields), function(err) {
+		    fs.appendFile("DATA/user-input-data.json", JSON.stringify(fields) + "\n", function(err) {
 				if(err) {
 				    return console.log(err);
 				}
