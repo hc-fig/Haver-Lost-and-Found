@@ -41,6 +41,8 @@ var searcher = function(path, query, callback) {
 }
 
 
+/*
 searcher("./DATA/user-input-data.json", "again", function(matches) {
 	console.log(matches);
 });
+*/
