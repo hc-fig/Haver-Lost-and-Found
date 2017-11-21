@@ -6,10 +6,9 @@
             $(document).ready(function(){
                 $("button").click(function(){
                     var search = $("#search_query").val();
-                    $.post("/search", {query: search}, function(result){
-                        alert(result);
+                    $.post("/search", {search_query: search}, function(result){
+                        $("div.search_results").replaceWith("<p>" + result.response + "</p>");
                     });
-                    $("div.search_results").replaceWith("<p>[placeholder for searched post!]</p>");
                 });
             });
         </script>

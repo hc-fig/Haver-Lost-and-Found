@@ -8,6 +8,9 @@ This is the main server file for the haver-lost-and-found webpage.
 var http = require('http');
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 var url = require('url');
 var fs = require('fs');
 var formidable = require('formidable');
@@ -24,7 +27,9 @@ app.get('/', function (req, res) {
 });
 
 app.post('/search', function(req, res) {
-	res.send({response: "nice"});
+	searcher.search_posts("./DATA/user-input-data.json", req.body.search_query, function(matched_posts) {
+		res.send({response: JSON.stringify(matched_posts)});
+	});
 });
 
 
@@ -58,7 +63,7 @@ app.post('/', function(req, res) {
 		}
 		else {
 			// Here we store the info from the form into a file
-		    fs.appendFile("DATA/user-input-data.json", JSON.stringify(fields) + "\n", function(err) {
+		    fs.appendFile("DATA/user-input-data.json", "\n" + JSON.stringify(fields), function(err) {
 				if(err) {
 				    return console.log(err);
 				}

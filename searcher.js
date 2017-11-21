@@ -1,12 +1,11 @@
-module.exports = searcher;
-
 var fs = require('fs'),
-    readline = require('readline');
+    readline = require('readline'),
+	exports = module.exports;
 
 
 
 
-var searcher = function(path, query, callback) {
+exports.search_posts = function(path, query, callback) {
 	
 	var rd = readline.createInterface({
 		input: fs.createReadStream(path),
@@ -39,10 +38,3 @@ var searcher = function(path, query, callback) {
 		callback(matches);
 	});
 }
-
-
-/*
-searcher("./DATA/user-input-data.json", "again", function(matches) {
-	console.log(matches);
-});
-*/
