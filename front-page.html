@@ -6,7 +6,7 @@
             $(document).ready(function(){
                 $("button").click(function(){
                     var search = $("#search_query").val();
-                    $.post("search.js", {query: search}, function(result){
+                    $.post("/search", {query: search}, function(result){
                         alert(result);
                     });
                     $("div.search_results").replaceWith("<p>[placeholder for searched post!]</p>");

@@ -19,13 +19,12 @@ var searcher = require('./searcher.js');
 
 
 // Defines the server (either displaying the page or processing user input accordingly)
-var server = http.createServer(function (req, res) {
-	
-	if (req.method.toLowerCase() == 'get') {
-		displayPage(res);
-	} else if (req.method.toLowerCase() == 'post') {
-		processForm(req, res);
-	}
+app.get('/', function (req, res) {
+	displayPage(res);
+});
+
+app.post('/search', function(req, res) {
+	res.send({response: "nice"});
 });
 
 
@@ -38,13 +37,14 @@ function displayPage(res) {
 			'Content-Length': data.length
         });
         res.write(data);
+		res.end();
     });
 }
 
 
 
 // Processes user input when they submit a form for a new lost and found post
-function processForm(req, res) {
+app.post('/', function(req, res) {
 	
 	var form = new formidable.IncomingForm();
 	
@@ -64,7 +64,7 @@ function processForm(req, res) {
 				}
 		    });
 		}
-		displayPage(res); // Displays the main page again
+		//displayPage(res); // Displays the main page again
 		
 		
 		// ***TODO: CALL TO JQUERY TO ADD "SUBMISSION ADDED" TEXT TO HTML***
@@ -90,10 +90,12 @@ function processForm(req, res) {
 		});
 		*/
     });
-}
+	
+	displayPage(res);
+});
 
 
 
 // Actually start listening for requests!
-server.listen(8080);
+app.listen(8080);
 console.log('server listening on 8080');
