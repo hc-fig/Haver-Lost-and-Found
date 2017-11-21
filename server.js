@@ -1,11 +1,24 @@
+/*
+Welcome!
+This is the main server file for the haver-lost-and-found webpage.
+*/
+
+
+// ############ Dependencies #############
 var http = require('http');
+var express = require('express');
+var app = express();
 var url = require('url');
 var fs = require('fs');
 var formidable = require('formidable');
 var util = require('util');
 var searcher = require('./searcher.js');
+// #######################################
 
 
+
+
+// Defines the server (either displaying the page or processing user input accordingly)
 var server = http.createServer(function (req, res) {
 	
 	if (req.method.toLowerCase() == 'get') {
@@ -16,56 +29,71 @@ var server = http.createServer(function (req, res) {
 });
 
 
+
+// Displays the page as defined in the front-page.html file
 function displayPage(res) {
-    fs.readFile('form.html', function (err, data) {
+    fs.readFile('front-page.html', function (err, data) {
         res.writeHead(200, {
             'Content-Type': 'text/html',
-			'Content-Length': data.length  // not really sure what this affects, the program runs fine without it
+			'Content-Length': data.length
         });
         res.write(data);
     });
 }
 
 
+
+// Processes user input when they submit a form for a new lost and found post
 function processForm(req, res) {
 	
 	var form = new formidable.IncomingForm();
 	
+	// Parses the user input
 	form.parse(req, function (err, fields, files) {
-		if (fields.username == "" || fields.item_name == "") {  // ***MAKE THIS LINE WORK! MAYBE UTIL.INSPECT RETURNS A STRING?***
-			// ***TELL THE USER THEY NEED A USERNAME AND ITEM NAME***
-			console.log("It works!");
+		
+		// We only accept posts with non-empty usernames and item names:
+		if (fields.username == "" || fields.item_name == "") {
+			// ***TODO: TELL USER THEY NEED A USERNAME AND ITEM NAME***
+			console.log("No username and/or item name!");
 		}
 		else {
-			// here we write the info from the form into a file
+			// Here we store the info from the form into a file
 		    fs.appendFile("DATA/user-input-data.json", JSON.stringify(fields) + "\n", function(err) {
 				if(err) {
 				    return console.log(err);
 				}
 		    });
 		}
-		displayPage(res); // display the main page again
-		
-		// ***CALL TO JQUERY TO ADD "SUBMISSION ADDED" TEXT TO HTML***
+		displayPage(res); // Displays the main page again
 		
 		
+		// ***TODO: CALL TO JQUERY TO ADD "SUBMISSION ADDED" TEXT TO HTML***
 		
-		// now we prepare to read from the data file and write it on the webpage
-        // res.writeHead(200, {
-            // 'content-type': 'text/plain'
-        // });
-        // res.write('loaded data from input file:\n\n');
+		
 
-		// fs.readFile("DATA/user-input-data.json", 'utf8', function read(err, data) {
-			// if (err) {
-				// throw err;
-			// }
-			// console.log(data);
-			// res.end(data);
-		// });
+		
+// ############ Old code for reading the data from the file and writing it to the webpage ############
+		
+		/*
+		now we prepare to read from the data file and write it on the webpage
+        res.writeHead(200, {
+            'content-type': 'text/plain'
+        });
+        res.write('loaded data from input file:\n\n');
+
+		fs.readFile("DATA/user-input-data.json", 'utf8', function read(err, data) {
+			if (err) {
+				throw err;
+			}
+			console.log(data);
+			res.end(data);
+		});
+		*/
     });
 }
 
 
+
+// Actually start listening for requests!
 server.listen(8080);
 console.log('server listening on 8080');

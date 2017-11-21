@@ -5,7 +5,10 @@
         <script>
             $(document).ready(function(){
                 $("button").click(function(){
-                    // RUN KADAN'S PROGRAM WITH THE SEARCH STRING AS INPUT (possibly data file as input too), OUTPUT JSON OBJECT GETS NAMED "result"
+                    var search = $("#search_query").val();
+                    $.post("search.js", {query: search}, function(result){
+                        alert(result);
+                    });
                     $("div.search_results").replaceWith("<p>[placeholder for searched post!]</p>");
                 });
             });
