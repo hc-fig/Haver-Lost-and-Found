@@ -4,10 +4,19 @@
 <!--                <script src="my_jquery_functions.js"></script>-->
         <script>
             $(document).ready(function(){
+                
                 $("button").click(function(){
                     var search = $("#search_query").val();
+                    
                     $.post("/search", {search_query: search}, function(result){
-                        $("div.search_results").replaceWith("<p>" + result.response + "</p>");
+                        //$(".search_results").empty();
+                        
+                        for (var i = 0; i < result.posts.length; i++) {
+                            $(".search_results").append("<p>" + "Username: " + result.posts[i].username + "</p>");
+                            $(".search_results").append("<p>" + "Item Name: " + result.posts[i].item_name + "</p>");
+                            $(".search_results").append("<p>" + "Description: " + result.posts[i].description + "</p>");
+                            $(".search_results").append("<br>");
+                        }
                     });
                 });
             });

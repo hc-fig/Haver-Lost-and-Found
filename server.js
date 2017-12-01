@@ -26,12 +26,6 @@ app.get('/', function (req, res) {
 	displayPage(res);
 });
 
-app.post('/search', function(req, res) {
-	searcher.search_posts("./DATA/user-input-data.json", req.body.search_query, function(matched_posts) {
-		res.send({response: JSON.stringify(matched_posts)});
-	});
-});
-
 
 
 // Displays the page as defined in the front-page.html file
@@ -45,6 +39,15 @@ function displayPage(res) {
 		res.end();
     });
 }
+
+
+
+// Handles requests made when using the item search bar
+app.post('/search', function(req, res) {
+	searcher.search_posts("./DATA/user-input-data.json", req.body.search_query, function(matched_posts) {
+		res.send({posts: matched_posts});
+	});
+});
 
 
 
