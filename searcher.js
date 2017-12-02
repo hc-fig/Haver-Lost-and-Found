@@ -7,6 +7,8 @@ var fs = require('fs'),
 
 exports.search_posts = function(path, query, callback) {
 	
+	query = query.toLowerCase();
+	
 	var rd = readline.createInterface({
 		input: fs.createReadStream(path),
 		//output: process.stdout,
@@ -22,7 +24,7 @@ exports.search_posts = function(path, query, callback) {
 		
 		var inPost = false;
 		for (key in post) {
-			if (post[key].search(query) != -1) {
+			if (post[key].toLowerCase().search(query) != -1) {
 				inPost = true;
 			}
 		}
@@ -35,6 +37,36 @@ exports.search_posts = function(path, query, callback) {
 	rd.on('close', function() {
 		//console.log("finished");
 		
+		callback(matches);
+	});
+}
+
+
+
+// 
+exports.filter_posts = function(path, key, val, callback) {
+	
+	var rd = readline.createInterface({
+		input: fs.createReadStream(path),
+		//output: process.stdout,
+		console: false
+	});
+	
+	
+	var matches = [];
+	
+	rd.on('line', function(line) {
+		//console.log("reading line\n");
+		var post = JSON.parse(line);
+		
+		if (post[key] == val) {
+			matches.push(post);
+		}
+	});
+	
+
+	rd.on('close', function() {
+		//console.log("finished");
 		callback(matches);
 	});
 }

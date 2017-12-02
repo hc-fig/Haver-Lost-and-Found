@@ -9,9 +9,10 @@
                     var search = $("#search_query").val();
                     
                     $.post("/search", {search_query: search}, function(result){
-                        //$(".search_results").empty();
+                        $(".search_results").empty();
                         
                         for (var i = 0; i < result.posts.length; i++) {
+                            $(".search_results").append("<p>" + "Type: " + result.posts[i].postType + "</p>");
                             $(".search_results").append("<p>" + "Username: " + result.posts[i].username + "</p>");
                             $(".search_results").append("<p>" + "Item Name: " + result.posts[i].item_name + "</p>");
                             $(".search_results").append("<p>" + "Description: " + result.posts[i].description + "</p>");
@@ -33,16 +34,20 @@
         <br> <!-- this will be replaced by a post display when the user clicks the search button-->
         </div>
         <br><br>
-        <h3>Fill out a new lost post form:</h3>
+        <h3>Submit a new lost or found post:</h3>
         <form action="" method="post" enctype="multipart/form-data">
             <fieldset>
+                <input type="radio" value="Lost" name="postType" checked="checked">Submitting a lost post
+                <br>
+                <input type="radio" value="Found" name="postType">Submitting a found post
+                <br><br>
                 <label for="username">Username:</label>
                 <br>
                 <input type="text" id="username" name="username" placeholder="Enter your username" />
                 <br><br>
                 <label for="item_name">Item name:</label>
                 <br>
-                <input type="text" id="item_name" name="item_name" placeholder="What did you lose?" />
+                <input type="text" id="item_name" name="item_name" placeholder="What did you lose/find?" />
                 <br><br>
                 <label for="description">Item description:</label>
                 <br>

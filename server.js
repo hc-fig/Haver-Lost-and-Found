@@ -21,16 +21,47 @@ var searcher = require('./searcher.js');
 
 
 
-// Defines the server (either displaying the page or processing user input accordingly)
+// The main page of the site
 app.get('/', function (req, res) {
-	displayPage(res);
+	displayHTML(res, './pages/front-page.html');
+});
+
+
+
+// Page for browsing lost posts
+app.get('/browseLostPosts', function(req, res) {
+	
+	searcher.filter_posts("./DB/user-input-data.json", "postType", "Lost", function(matches) {
+		//console.log("working");
+		
+		//displayHTML(res, './pages/browse-lost-posts.html');
+		
+		for (var i = 0; i < matches.length; i++) {
+			res.write(JSON.stringify(matches[i]) + "\n");
+		}
+		res.end();
+	});
+});
+
+
+
+// Page for browsing found posts
+app.get('/browseFoundPosts', function(req, res) {
+	
+	searcher.filter_posts("./DB/user-input-data.json", "postType", "Found", function(matches) {
+		//console.log("working");
+		for (var i = 0; i < matches.length; i++) {
+			res.write(JSON.stringify(matches[i]) + "\n");
+		}
+		res.end();
+	});
 });
 
 
 
 // Displays the page as defined in the front-page.html file
-function displayPage(res) {
-    fs.readFile('front-page.html', function (err, data) {
+function displayHTML(res, path) {
+    fs.readFile(path, function (err, data) {
         res.writeHead(200, {
             'Content-Type': 'text/html',
 			'Content-Length': data.length
@@ -44,7 +75,7 @@ function displayPage(res) {
 
 // Handles requests made when using the item search bar
 app.post('/search', function(req, res) {
-	searcher.search_posts("./DATA/user-input-data.json", req.body.search_query, function(matched_posts) {
+	searcher.search_posts("./DB/user-input-data.json", req.body.search_query, function(matched_posts) {
 		res.send({posts: matched_posts});
 	});
 });
@@ -66,13 +97,13 @@ app.post('/', function(req, res) {
 		}
 		else {
 			// Here we store the info from the form into a file
-		    fs.appendFile("DATA/user-input-data.json", "\n" + JSON.stringify(fields), function(err) {
+		    fs.appendFile("DB/user-input-data.json", "\n" + JSON.stringify(fields), function(err) {
 				if(err) {
 				    return console.log(err);
 				}
 		    });
 		}
-		//displayPage(res); // Displays the main page again
+		//displayHTML(res, './pages/front-page.html'); // Displays the main page again
 		
 		
 		// ***TODO: CALL TO JQUERY TO ADD "SUBMISSION ADDED" TEXT TO HTML***
@@ -89,7 +120,7 @@ app.post('/', function(req, res) {
         });
         res.write('loaded data from input file:\n\n');
 
-		fs.readFile("DATA/user-input-data.json", 'utf8', function read(err, data) {
+		fs.readFile("DB/user-input-data.json", 'utf8', function read(err, data) {
 			if (err) {
 				throw err;
 			}
@@ -99,7 +130,7 @@ app.post('/', function(req, res) {
 		*/
     });
 	
-	displayPage(res);
+	displayHTML(res, './pages/front-page.html');
 });
 
 
