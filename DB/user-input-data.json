@@ -1,4 +1,2 @@
-{"postType":"Lost","username":"Pablo","item_name":"Hat","description":"It's green"}
-{"postType":"Lost","username":"Pablo","item_name":"Green scarf","description":"I think I lost it near the GIAC"}
-{"postType":"Lost","username":"Digo","item_name":"Banana republic jacket","description":"It's black"}
-{"postType":"Found","username":"Pablo","item_name":"Speaker","description":"Big blue speaker"}
+{"postType":"Lost","username":"Pablo","item_name":"Hat","description":"It's green","date":"2017-12-03T20:18:32.280Z"}
+{"postType":"Found","username":"Pablo","item_name":"jacket","description":"Its green","date":"2017-12-03T20:50:12.408Z"}

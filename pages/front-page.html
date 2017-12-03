@@ -5,7 +5,7 @@
         <script>
             $(document).ready(function(){
                 
-                $("button").click(function(){
+                $("#search").click(function(){
                     var search = $("#search_query").val();
                     
                     $.post("/search", {search_query: search}, function(result){
@@ -16,20 +16,36 @@
                             $(".search_results").append("<p>" + "Username: " + result.posts[i].username + "</p>");
                             $(".search_results").append("<p>" + "Item Name: " + result.posts[i].item_name + "</p>");
                             $(".search_results").append("<p>" + "Description: " + result.posts[i].description + "</p>");
+                            $(".search_results").append("<p>" + "Date added: " + formatDate(new Date(result.posts[i].date)) + "</p>");
                             $(".search_results").append("<br>");
                         }
                     });
                 });
+                
+                $("#browseLost").click(function(){
+                    window.location.href = "/browseLost";
+                });
+                
+                $("#browseFound").click(function(){
+                    window.location.href = "/browseFound";
+                });
             });
+            
+            function formatDate(d) {  // d should be a Date object. Returns a string
+                return d.getMonth() + 1 + "/" + d.getDay() + 1 + "/" + d.getFullYear();
+            }
         </script>
         
     </head>
     <body>
         <h2>Welcome to Haver Lost and Found!</h2>
         <br>
+        <button id="browseLost">Browse lost posts</button>
+        <button id="browseFound">Browse found posts</button>
+        <br><br>
         <h3>Search for an item:</h3>
         <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." />
-        <button>Search</button>
+        <button id="search">Search</button>
         <div class="search_results">
         <br> <!-- this will be replaced by a post display when the user clicks the search button-->
         </div>

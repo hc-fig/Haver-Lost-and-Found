@@ -16,6 +16,7 @@ var fs = require('fs');
 var formidable = require('formidable');
 var util = require('util');
 var searcher = require('./searcher.js');
+var uuid = require('uuid/v4');
 // #######################################
 
 
@@ -29,7 +30,7 @@ app.get('/', function (req, res) {
 
 
 // Page for browsing lost posts
-app.get('/browseLostPosts', function(req, res) {
+app.get('/browseLost', function(req, res) {
 	
 	searcher.filter_posts("./DB/user-input-data.json", "postType", "Lost", function(matches) {
 		//console.log("working");
@@ -46,7 +47,7 @@ app.get('/browseLostPosts', function(req, res) {
 
 
 // Page for browsing found posts
-app.get('/browseFoundPosts', function(req, res) {
+app.get('/browseFound', function(req, res) {
 	
 	searcher.filter_posts("./DB/user-input-data.json", "postType", "Found", function(matches) {
 		//console.log("working");
@@ -59,7 +60,7 @@ app.get('/browseFoundPosts', function(req, res) {
 
 
 
-// Displays the page as defined in the front-page.html file
+// Displays the HTML file found at the given path
 function displayHTML(res, path) {
     fs.readFile(path, function (err, data) {
         res.writeHead(200, {
@@ -76,6 +77,7 @@ function displayHTML(res, path) {
 // Handles requests made when using the item search bar
 app.post('/search', function(req, res) {
 	searcher.search_posts("./DB/user-input-data.json", req.body.search_query, function(matched_posts) {
+		matched_posts.sort(function(a, b) { return (a.date < b.date)});
 		res.send({posts: matched_posts});
 	});
 });
@@ -96,6 +98,9 @@ app.post('/', function(req, res) {
 			console.log("No username and/or item name!");
 		}
 		else {
+			fields.date = new Date();  // store the date
+			fields.uuid = uuid();      // give the new post a unique identifier
+			
 			// Here we store the info from the form into a file
 		    fs.appendFile("DB/user-input-data.json", "\n" + JSON.stringify(fields), function(err) {
 				if(err) {

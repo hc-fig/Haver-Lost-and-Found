@@ -22,6 +22,10 @@ exports.search_posts = function(path, query, callback) {
 		//console.log("\n");
 		var post = JSON.parse(line);
 		
+		// remove the 'date' and 'uuid' fields from the fields to be searched
+		delete post['date'];
+		delete post['uuid'];
+		
 		var inPost = false;
 		for (key in post) {
 			if (post[key].toLowerCase().search(query) != -1) {
@@ -30,8 +34,8 @@ exports.search_posts = function(path, query, callback) {
 		}
 		
 		if (inPost) {
-			matches.push(post);
-		}
+			matches.push(JSON.parse(line));  // we read the line again here in order to get the 'date'
+		}                                    // and 'uuid' fields back since we deleted them earlier
 	});
 
 	rd.on('close', function() {
