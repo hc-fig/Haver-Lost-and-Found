@@ -1,7 +1,7 @@
 # Haver-Lost-and-Found
 A lost and found site for use at Haverford College
 
-NOTE: This site is not yet being run on a permanent web server! To access the site in the meantime, follow the usage instructions below.
+NOTE: This site is not yet being run on a permanent web server! To access the site in the meantime, please follow the usage instructions below.
 
 
 USAGE INSTRUCTIONS:
