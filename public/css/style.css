@@ -1,0 +1,26 @@
+body {
+    
+}
+.jumbotron {
+    
+    text-align: center;
+    background-color: #ff0000;
+    font-size: 80px;
+    
+}
+h3 {
+    
+    font-size: 60px;
+    background-color: white;
+}
+mybutton{
+    text-align: center;
+    
+}
+.button{
+    text-align: center;
+}
+.search_results{
+    color: white;
+}
+

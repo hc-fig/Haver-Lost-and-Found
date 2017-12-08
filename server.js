@@ -59,6 +59,9 @@ app.get('/browseFound', function(req, res) {
 });
 
 
+// Allows use of css files place in the public folder
+app.use(express.static('public'))
+
 
 // Displays the HTML file found at the given path
 function displayHTML(res, path) {
