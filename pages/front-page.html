@@ -1,6 +1,14 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" type="text/css" rel="stylesheet">
+        
         <script>
             $(document).ready(function(){
                 
@@ -15,13 +23,28 @@
                         $(".search_results").empty();
                         
                         // Formats and displays the data appropriately
+                        $(".search_results").append("<br><br>");
+                        $(".search_results").append("<div class='row'>");
                         for (var i = 0; i < result.posts.length; i++) {
-                            $(".search_results").append("<p>" + "Type: " + result.posts[i].postType + "</p>");
-                            $(".search_results").append("<p>" + "Username: " + result.posts[i].username + "</p>");
-                            $(".search_results").append("<p>" + "Item Name: " + result.posts[i].item_name + "</p>");
-                            $(".search_results").append("<p>" + "Description: " + result.posts[i].description + "</p>");
-                            $(".search_results").append("<p>" + "Date added: " + formatDate(new Date(result.posts[i].date)) + "</p>");
-                            $(".search_results").append("<br>");
+                            var color = "red";
+                            if (i %2 == 0){
+                                color = "black";
+                            }
+                            $(".search_results").append(
+                                "<div class='col-md-4'style=background-color:" +color+";>" +
+                                "<h2> Item " + (i+1) + "</h2>" +
+                                "<p>" + "Type: " + result.posts[i].postType + "</p>" + 
+                                "<p>" + "Username: " + result.posts[i].username + "</p>" + 
+                                "<p>" + "Item Name: " + result.posts[i].item_name + "</p>" + 
+                                "<p>" + "Description: " + result.posts[i].description + "</p>" +
+                                "<p>" + "Date added: " + formatDate(new Date(result.posts[i].date)) + "</p>" + 
+                                "<br>" +
+                                "</div>"
+                                
+                                
+                            );
+                        $(".search_results").append("</div>");    
+                            
                         }
                     });
                 });
@@ -45,46 +68,58 @@
         
     </head>
     <body>
-        <!--############## How could we not greet the user? ##############-->
-        <h2>Welcome to Haver Lost and Found!</h2>
-        <br>
-        
-        <!--############## Displays links to lost/found pages ##############-->
-        <button id="browseLost">Browse lost posts</button>
-        <button id="browseFound">Browse found posts</button>
-        <br><br>
-        
-        <!--############## Displays search field ##############-->
-        <h3>Search for an item:</h3>
-        <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." />
-        <button id="search">Search</button>
-        <div class="search_results">
-        <br> <!-- this will be replaced by a post display when the user clicks the search button-->
+
+        <!--############## Greet the user ##############-->        
+        <div class = container>
+            <div class = jumbotron>
+                <h1>Welcome to Haver Lost and Found!</h1>
+            </div>
+            <br>
+            
+            <!--############## Displays links to lost/found pages ##############-->
+            <button id="browseLost">Browse lost posts</button>
+            <button id="browseFound">Browse found posts</button>
+            <br><br>
+            
+            
+            <!--############## Displays search field ##############-->
+            <h3>Search for an item:</h3>
+            <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." />
+            <button id="search">Search</button>
         </div>
-        <br><br>
+        
+        <!--############## Displays search results ##############-->
+        <div class = container>
+            <div class="search_results">
+            <br> <!-- this will be replaced by a post display when the user clicks the search button-->
+            </div>
+        </div>
         
         <!--############## Displays new post submission form ##############-->
-        <h3>Submit a new lost or found post:</h3>
-        <form action="" method="post" enctype="multipart/form-data">
-            <fieldset>
-                <input type="radio" value="Lost" name="postType" checked="checked">Submitting a lost post
-                <br>
-                <input type="radio" value="Found" name="postType">Submitting a found post
-                <br><br>
-                <label for="username">Username:</label>
-                <br>
-                <input type="text" id="username" name="username" placeholder="Enter your username" />
-                <br><br>
-                <label for="item_name">Item name:</label>
-                <br>
-                <input type="text" id="item_name" name="item_name" placeholder="What did you lose/find?" />
-                <br><br>
-                <label for="description">Item description:</label>
-                <br>
-                <textarea id="description" name="description" placeholder="Describe the item" rows=5 cols=40></textarea>
-                <br><br>
-                <input type="submit" value="Submit new lost and found post!" />
-            </fieldset>
-        </form>
+        <div class = container>
+            <br><br>
+            <h3>Submit a new lost or found post:</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="radio" value="Lost" name="postType" checked="checked">Submitting a lost post
+                    <br>
+                    <input type="radio" value="Found" name="postType">Submitting a found post
+                    <br><br>
+                    <label for="username">Username:</label>
+                    <br>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" />
+                    <br><br>
+                    <label for="item_name">Item name:</label>
+                    <br>
+                    <input type="text" id="item_name" name="item_name" placeholder="What did you lose/find?" />
+                    <br><br>
+                    <label for="description">Item description:</label>
+                    <br>
+                    <textarea id="description" name="description" placeholder="Describe the item" rows=5 cols=40></textarea>
+                    <br><br>
+                    <input type="submit" value="Submit new lost and found post!" />
+                </fieldset>
+            </form>
+        </div>
     </body>
 </html>
