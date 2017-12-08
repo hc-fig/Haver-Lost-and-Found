@@ -25,13 +25,18 @@
                         // Formats and displays the data appropriately
                         $(".search_results").append("<br><br>");
                         $(".search_results").append("<div class='row'>");
+                        var color;
                         for (var i = 0; i < result.posts.length; i++) {
-                            var color = "red";
+                            
+                            color = "red";
                             if (i %2 == 0){
                                 color = "black";
                             }
+                            
+                            
+    
                             $(".search_results").append(
-                                "<div class='col-md-4'style=background-color:" +color+";>" +
+                                "<div class='col-md-4' style='border:10px double " +color +"';"  + ">" + 
                                 "<h2> Item " + (i+1) + "</h2>" +
                                 "<p>" + "Type: " + result.posts[i].postType + "</p>" + 
                                 "<p>" + "Username: " + result.posts[i].username + "</p>" + 
@@ -46,6 +51,13 @@
                         $(".search_results").append("</div>");    
                             
                         }
+                        if (results.posts.length == 0){
+                            $(".search_results").append(
+                            "<h2>Sorry, we have no results for that search</h2>" + 
+                            "<p>Please try checking to make sure you have not mispelled your search. Also, try using a synonym such as jacket instead of coat.</p>"
+                            );
+                        }
+                        
                     });
                 });
                 
@@ -68,18 +80,30 @@
         
     </head>
     <body>
-
-        <!--############## Greet the user ##############-->        
+        
         <div class = container>
-            <div class = jumbotron>
-                <h1>Welcome to Haver Lost and Found!</h1>
-            </div>
-            <br>
             
-            <!--############## Displays links to lost/found pages ##############-->
-            <button id="browseLost">Browse lost posts</button>
-            <button id="browseFound">Browse found posts</button>
+            <!--############## Title at top as well as the selection bar ##############-->        
+        
+            <div class="masthead">
+                <h1> Haver Lost and Found</h1>
+                
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="">Home</a></li>
+                        <li><a href="#">Submit a New Post</a></li>
+                        <li><a href="browseLost">Lost Item List</a></li>
+                        <li><a href="browseFound">Found Item List</a></li>
+                        
+                        
+                    </ul>
+                </nav>
+            </div>
             <br><br>
+            <div class="jumbotron">
+                <h2>Welcome</h2>
+                <p-2>This is Haverford's Lost and Found Website! Text as placeholder for an explanation: Text text text ksdjv kdfj sdk dkjf jkdfj dkjdk jfdkjd slsdjf lsdkjf lkdfj dlkfj dlfj dlfjd ldfj ldfj dlfj dlkfj dlfj dlfj dlf jdlfj dlkfj dlkf jdlk jsldjs lsdjf dlsfj dslj fdlkj fjlsdj fldj fldkf jdlkj dl</p-2>
+            </div>
             
             
             <!--############## Displays search field ##############-->
@@ -89,7 +113,7 @@
         </div>
         
         <!--############## Displays search results ##############-->
-        <div class = container>
+        <div class = container >
             <div class="search_results">
             <br> <!-- this will be replaced by a post display when the user clicks the search button-->
             </div>
@@ -120,6 +144,13 @@
                     <input type="submit" value="Submit new lost and found post!" />
                 </fieldset>
             </form>
+            
+        <footer class="footer">
+            <p>Created by Pablo Thiel and Kadan Lottick</p>
+        </footer>    
+        
         </div>
+        
+        
     </body>
 </html>
