@@ -2,9 +2,12 @@ var fs = require('fs'),
     readline = require('readline'),
 	exports = module.exports;
 
+	
 
 
-
+// Searches for the given query in each of the post objects given by the file located at the given path and
+// passes to a given callback an array of the posts which contain that query in one of their relevant fields
+// (i.e. not date or uuid)
 exports.search_posts = function(path, query, callback) {
 	
 	query = query.toLowerCase();
@@ -47,7 +50,10 @@ exports.search_posts = function(path, query, callback) {
 
 
 
-// 
+
+// Takes the post objects given by the file located at the given path and passes to a given callback
+// an array of posts which contain the given value for the given key. Useful for searching by only
+// username or lost/found
 exports.filter_posts = function(path, key, val, callback) {
 	
 	var rd = readline.createInterface({

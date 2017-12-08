@@ -1,6 +1,8 @@
 # Haver-Lost-and-Found
 A lost and found site for use at Haverford College
 
+The main files of the project are server.js and front-page.html (the latter of which is located in the "pages" folder)
+
 NOTE: This site is not yet being run on a permanent web server! To access the site in the meantime, please follow the usage instructions below.
 
 

@@ -1,16 +1,20 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--                <script src="my_jquery_functions.js"></script>-->
         <script>
             $(document).ready(function(){
                 
+                // Handles search requests initiated by clicking the "search" button
                 $("#search").click(function(){
+                    
+                    // Takes the current contents of the search_query box
                     var search = $("#search_query").val();
                     
+                    // Sends the info to the server, which will give us an array of matched posts
                     $.post("/search", {search_query: search}, function(result){
                         $(".search_results").empty();
                         
+                        // Formats and displays the data appropriately
                         for (var i = 0; i < result.posts.length; i++) {
                             $(".search_results").append("<p>" + "Type: " + result.posts[i].postType + "</p>");
                             $(".search_results").append("<p>" + "Username: " + result.posts[i].username + "</p>");
@@ -22,15 +26,18 @@
                     });
                 });
                 
+                // Link to the "browse lost" page
                 $("#browseLost").click(function(){
                     window.location.href = "/browseLost";
                 });
                 
+                // Link to the "browse found" page
                 $("#browseFound").click(function(){
                     window.location.href = "/browseFound";
                 });
             });
             
+            // Helper function for formatting dates using slash notation
             function formatDate(d) {  // d should be a Date object. Returns a string
                 return d.getMonth() + 1 + "/" + d.getDay() + 1 + "/" + d.getFullYear();
             }
@@ -38,11 +45,16 @@
         
     </head>
     <body>
+        <!--############## How could we not greet the user? ##############-->
         <h2>Welcome to Haver Lost and Found!</h2>
         <br>
+        
+        <!--############## Displays links to lost/found pages ##############-->
         <button id="browseLost">Browse lost posts</button>
         <button id="browseFound">Browse found posts</button>
         <br><br>
+        
+        <!--############## Displays search field ##############-->
         <h3>Search for an item:</h3>
         <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." />
         <button id="search">Search</button>
@@ -50,6 +62,8 @@
         <br> <!-- this will be replaced by a post display when the user clicks the search button-->
         </div>
         <br><br>
+        
+        <!--############## Displays new post submission form ##############-->
         <h3>Submit a new lost or found post:</h3>
         <form action="" method="post" enctype="multipart/form-data">
             <fieldset>

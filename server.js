@@ -1,7 +1,8 @@
 /*
 Welcome!
-This is the main server file for the haver-lost-and-found webpage.
+This is the web server file for the haver-lost-and-found website.
 */
+
 
 
 // ############ Dependencies #############
@@ -21,15 +22,14 @@ var uuid = require('uuid/v4');
 
 
 
-
-// The main page of the site
+// Displays the main page of the site
 app.get('/', function (req, res) {
 	displayHTML(res, './pages/front-page.html');
 });
 
 
 
-// Page for browsing lost posts
+// Displays page for browsing lost posts
 app.get('/browseLost', function(req, res) {
 	
 	searcher.filter_posts("./DB/user-input-data.json", "postType", "Lost", function(matches) {
@@ -46,11 +46,11 @@ app.get('/browseLost', function(req, res) {
 
 
 
-// Page for browsing found posts
+// Displays page for browsing found posts
 app.get('/browseFound', function(req, res) {
 	
+	// The "filter_posts" function can be found in the searcher.js file located in the main folder
 	searcher.filter_posts("./DB/user-input-data.json", "postType", "Found", function(matches) {
-		//console.log("working");
 		for (var i = 0; i < matches.length; i++) {
 			res.write(JSON.stringify(matches[i]) + "\n");
 		}
@@ -76,6 +76,8 @@ function displayHTML(res, path) {
 
 // Handles requests made when using the item search bar
 app.post('/search', function(req, res) {
+	
+	// The "search_posts" function can be found in the searcher.js file located int he main folder
 	searcher.search_posts("./DB/user-input-data.json", req.body.search_query, function(matched_posts) {
 		matched_posts.sort(function(a, b) { return (a.date < b.date)});
 		res.send({posts: matched_posts});
@@ -94,7 +96,6 @@ app.post('/', function(req, res) {
 		
 		// We only accept posts with non-empty usernames and item names:
 		if (fields.username == "" || fields.item_name == "") {
-			// ***TODO: TELL USER THEY NEED A USERNAME AND ITEM NAME***
 			console.log("No username and/or item name!");
 		}
 		else {
@@ -108,31 +109,6 @@ app.post('/', function(req, res) {
 				}
 		    });
 		}
-		//displayHTML(res, './pages/front-page.html'); // Displays the main page again
-		
-		
-		// ***TODO: CALL TO JQUERY TO ADD "SUBMISSION ADDED" TEXT TO HTML***
-		
-		
-
-		
-// ############ Old code for reading the data from the file and writing it to the webpage ############
-		
-		/*
-		now we prepare to read from the data file and write it on the webpage
-        res.writeHead(200, {
-            'content-type': 'text/plain'
-        });
-        res.write('loaded data from input file:\n\n');
-
-		fs.readFile("DB/user-input-data.json", 'utf8', function read(err, data) {
-			if (err) {
-				throw err;
-			}
-			console.log(data);
-			res.end(data);
-		});
-		*/
     });
 	
 	displayHTML(res, './pages/front-page.html');
