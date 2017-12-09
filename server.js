@@ -105,7 +105,7 @@ app.post('/search', function(req, res) {
 
 
 // Processes user input when they submit a form for a new lost and found post
-app.post('/new post', function(req, res) {
+app.post('/submitNewPost', function(req, res) {
 	
 	var form = new formidable.IncomingForm();
 	
@@ -129,8 +129,10 @@ app.post('/new post', function(req, res) {
 		}
     });
 	
-	displayHTML(res, './pages/front-page.html');
+	displayHTML(res, './pages/submit-a-new-post.html');
 });
+
+
 
 
 
