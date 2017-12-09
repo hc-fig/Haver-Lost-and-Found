@@ -48,10 +48,10 @@
                                 
                                 
                             );
-                        $(".search_results").append("</div>");    
+                               
                             
-                        }
-                        if (results.posts.length == 0){
+                            }
+                        if (result.posts.length == 0){
                             $(".search_results").append(
                             "<h2>Sorry, we have no results for that search</h2>" + 
                             "<p>Please try checking to make sure you have not mispelled your search. Also, try using a synonym such as jacket instead of coat.</p>"
@@ -61,15 +61,7 @@
                     });
                 });
                 
-                // Link to the "browse lost" page
-                $("#browseLost").click(function(){
-                    window.location.href = "/browseLost";
-                });
                 
-                // Link to the "browse found" page
-                $("#browseFound").click(function(){
-                    window.location.href = "/browseFound";
-                });
             });
             
             // Helper function for formatting dates using slash notation
@@ -91,7 +83,7 @@
                 <nav>
                     <ul class="nav nav-justified">
                         <li class="active"><a href="">Home</a></li>
-                        <li><a href="#">Submit a New Post</a></li>
+                        <li><a href="submitNewPost">Submit a New Post</a></li>
                         <li><a href="browseLost">Lost Item List</a></li>
                         <li><a href="browseFound">Found Item List</a></li>
                         

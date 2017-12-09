@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" type="text/css" rel="stylesheet">
+        
+<!--                <script src="my_jquery_functions.js"></script>-->
+        <script>
+            $(document).ready(function(){
+                
+                
+                
+                    
+                    $.post("/search", {search_query: "found"}, function(result){
+                        
+                        
+                        $(".results").empty();
+                       
+                        
+                       
+                        
+                        
+                        
+                        
+                        // Formats and displays the data appropriately
+                        $(".results").append("<br><br>");
+                        $(".results").append("<div class='row'>");
+                        var color;
+                        
+                        
+                        
+                        for (var i = 0; i < result.posts.length; i++) {
+                        
+                            color = "red";
+                            if (i %2 == 0){
+                                color = "black";
+                            }
+                            
+                            
+                            
+                            $(".results").append(
+                                "<div class='col-md-4' style='border:10px double " +color +"';"  + ">" + 
+                                "<h2> Item " + (i+1) + "</h2>" +
+                                "<p>" + "Type: " + result.posts[i].postType + "</p>" + 
+                                "<p>" + "Username: " + result.posts[i].username + "</p>" + 
+                                "<p>" + "Item Name: " + result.posts[i].item_name + "</p>" + 
+                                "<p>" + "Description: " + result.posts[i].description + "</p>" +
+                                "<p>" + "Date added: " + formatDate(new Date(result.posts[i].date)) + "</p>" + 
+                                "<br>" +
+                                "</div>"
+                                
+                                
+                            );
+                        
+                            
+                        
+                        }
+                        
+                        
+                        if (result.posts.length == 0){
+                            $(".results").append(
+                            "<h2>Sorry, we have no found posts at the moment.</h2>"
+                            
+                            );
+                        }
+                        
+                        
+                         
+                        
+                        
+		      
+	               });
+               // Helper function for formatting dates using slash notation
+                function formatDate(d) {  // d should be a Date object. Returns a string
+                    return d.getMonth() + 1 + "/" + d.getDay() + 1 + "/" + d.getFullYear();
+                }
+            });
+        </script>
+        
+    </head>
+    <body>
+        
+        
+        <div class = container>
+             <div class="masthead">
+                <h1> Haver Lost and Found</h1>
+                
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="submitNewPost">Submit a New Post</a></li>
+                        <li><a href="browseLost">Lost Item List</a></li>
+                        <li class="active"><a href="browseFound">Found Item List</a></li>
+                        
+                        
+                    </ul>
+                </nav>
+            </div>
+            <h2>All Found Posts:</h2>
+            <div class = "results">
+                
+                <br>
+            </div>
+        </div>
+        <br>
+        <br><br>
+    </body>
+</html>

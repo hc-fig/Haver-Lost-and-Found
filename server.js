@@ -31,24 +31,38 @@ app.get('/', function (req, res) {
 
 // Displays page for browsing lost posts
 app.get('/browseLost', function(req, res) {
-	
+
+
+	displayHTML(res, './pages/browse-lost-posts.html');
+
+	/*
 	searcher.filter_posts("./DB/user-input-data.json", "postType", "Lost", function(matches) {
 		//console.log("working");
 		
-		//displayHTML(res, './pages/browse-lost-posts.html');
+		
 		
 		for (var i = 0; i < matches.length; i++) {
 			res.write(JSON.stringify(matches[i]) + "\n");
 		}
 		res.end();
 	});
+	*/
 });
+
+
+// Displays page for submitting a new post
+app.get('/submitNewPost', function(req, res) {
+	displayHTML(res, './pages/submit-a-new-post.html');
+});
+
 
 
 
 // Displays page for browsing found posts
 app.get('/browseFound', function(req, res) {
 	
+	displayHTML(res, './pages/browse-found-posts.html');
+	/*
 	// The "filter_posts" function can be found in the searcher.js file located in the main folder
 	searcher.filter_posts("./DB/user-input-data.json", "postType", "Found", function(matches) {
 		for (var i = 0; i < matches.length; i++) {
@@ -56,6 +70,7 @@ app.get('/browseFound', function(req, res) {
 		}
 		res.end();
 	});
+	*/
 });
 
 
@@ -90,7 +105,7 @@ app.post('/search', function(req, res) {
 
 
 // Processes user input when they submit a form for a new lost and found post
-app.post('/', function(req, res) {
+app.post('/new post', function(req, res) {
 	
 	var form = new formidable.IncomingForm();
 	
