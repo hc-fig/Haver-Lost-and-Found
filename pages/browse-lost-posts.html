@@ -44,13 +44,12 @@
                             
                             
                             $(".results").append(
-                                "<div class='col-md-4' style='border:10px double " +color +"';"  + ">" + 
-                                "<h2> Item " + (i+1) + "</h2>" +
-                                "<p>" + "Type: " + result.posts[i].postType + "</p>" + 
-                                "<p>" + "Username: " + result.posts[i].username + "</p>" + 
-                                "<p>" + "Item Name: " + result.posts[i].item_name + "</p>" + 
-                                "<p>" + "Description: " + result.posts[i].description + "</p>" +
-                                "<p>" + "Date added: " + formatDate(new Date(result.posts[i].date)) + "</p>" + 
+                                "<div class='col-md-4' style='border:10px double " + color + "';>" + 
+                                "<h2><b>" + result.posts[i].item_name + "</b></h2>" +
+                                "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
+                                "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
+                                "<p><b> Description:</b> " + result.posts[i].description + "</p>" +
+                                "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" + 
                                 "<br>" +
                                 "</div>"
                                 
@@ -88,7 +87,7 @@
         
         <div class = container>
              <div class="masthead">
-                <h1> Haver Lost and Found</h1>
+                <h1><b>Haver Lost and Found</b></h1>
                 
                 <nav>
                     <ul class="nav nav-justified">
