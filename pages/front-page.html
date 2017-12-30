@@ -19,12 +19,9 @@
                 });
                 */
                 
-                // Allows users to submit the form by hitting enter in the search field
-                $("#search_query").keyup(function(event) {
-                    //if (event.keyCode == 13 || event.which == 13) {
-                        submit_search();
-                        //return false;
-                    //}
+                // Continuously submits a search after each character typed into the search box
+                $("#search_query").on("input", function() {
+                    submit_search();
                 });
                 
                 
