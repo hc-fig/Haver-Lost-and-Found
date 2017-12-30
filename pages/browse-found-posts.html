@@ -36,7 +36,7 @@
                         
                         for (var i = 0; i < result.posts.length; i++) {
                         
-                            color = "red";
+                            color = "crimson";
                             if (i %2 == 0){
                                 color = "black";
                             }
@@ -44,12 +44,12 @@
                             
                             
                             $(".results").append(
-                                "<div class='col-md-4' style='border:9px solid " + color + "';>" + 
-                                "<h2><b>" + result.posts[i].item_name + "</b></h2>" +
+                                "<div class='col-md-4' style='border: 5px solid white; color: white; background-color: " + color + "';>" + 
+                                "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
                                 "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
                                 "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
                                 "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" +
-                                "<p><b> Description:</b> " + result.posts[i].description + "</p>" + 
+                                "<p><b> Description:</b> " + result.posts[i].description + "</p>" +
                                 "<br>" +
                                 "</div>"
                                 
@@ -76,7 +76,7 @@
 	               });
                // Helper function for formatting dates using slash notation
                 function formatDate(d) {  // d should be a Date object. Returns a string
-                    return d.getMonth() + 1 + "/" + d.getDay() + 1 + "/" + d.getFullYear();
+                    return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
                 }
             });
         </script>
@@ -90,7 +90,7 @@
                 <div style='background-color: crimson; color: white; font-size: 50'>
                     <a href='https://www.haverford.edu/'><img style='padding: 10px' src='https://www.haverford.edu/sites/default/files/Office/Communications/Haverford-College-Logo.png' alt='Haverford College Logo' /></a>
                     <span style='float: right; padding: 30px'>
-                        <b>&nbsp Haver Lost and Found</b>
+                        <b>&nbsp <span style="font-size: 45">The</span> Haverford Lost Bin</b
                     </span>
                 </div>
                 
@@ -98,20 +98,28 @@
                     <ul class="nav nav-justified">
                         <li><a href="/">Home</a></li>
                         <li><a href="submitNewPost">Submit a New Post</a></li>
-                        <li><a href="browseLost">Lost Item List</a></li>
-                        <li class="active"><a href="browseFound">Found Item List</a></li>
+                        <li><a href="browseLost">Browse Lost</a></li>
+                        <li class="active"><a href="browseFound">Browse Found</a></li>
                         
                         
                     </ul>
                 </nav>
             </div>
-            <h2>All Found Posts:</h2>
+            <br>
+            <h3>All Found Posts:</h3>
             <div class = "results">
                 
                 <br>
             </div>
         </div>
-        <br>
-        <br><br>
+        
+        <!--############## Displays footer information ##############-->
+        <div class = container>
+            
+            <footer class="footer">
+                <p>Created by Pablo Thiel and Kadan Lottick</p>
+            </footer>    
+        
+        </div>
     </body>
 </html>

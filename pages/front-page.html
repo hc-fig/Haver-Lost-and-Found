@@ -11,6 +11,7 @@
         
         <script>
             $(document).ready(function(){
+                submit_search();
                 
                 /*
                 // Handles search requests initiated by clicking the "search" button
@@ -48,8 +49,8 @@
                             
     
                             $(".search_results").append(
-                                "<div class='col-md-4' style='border:9px solid " + color + "';>" + 
-                                "<h2><b>" + result.posts[i].item_name + "</b></h2>" +
+                                "<div class='col-md-4' style='border: 5px solid white; color: white; background-color: " + color + "';>" + 
+                                "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
                                 "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
                                 "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
                                 "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" +
@@ -77,7 +78,7 @@
             
             // Helper function for formatting dates using slash notation
             function formatDate(d) {  // d should be a Date object. Returns a string
-                return d.getMonth() + 1 + "/" + d.getDay() + 1 + "/" + d.getFullYear();
+                return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
             }
         </script>
         
@@ -92,15 +93,15 @@
                 <div style='background-color: crimson; color: white; font-size: 50'>
                     <a href='https://www.haverford.edu/'><img style='padding: 10px' src='https://www.haverford.edu/sites/default/files/Office/Communications/Haverford-College-Logo.png' alt='Haverford College Logo' /></a>
                     <span style='float: right; padding: 30px'>
-                        <b>&nbsp Haver Lost and Found</b>
+                        <b>&nbsp <span style="font-size: 45">The</span> Haverford Lost Bin</b>
                     </span>
                 </div>
                 <nav>
                     <ul class="nav nav-justified">
                         <li class="active"><a href="">Home</a></li>
                         <li><a href="submitNewPost">Submit a New Post</a></li>
-                        <li><a href="browseLost">Lost Item List</a></li>
-                        <li><a href="browseFound">Found Item List</a></li>
+                        <li><a href="browseLost">Browse Lost</a></li>
+                        <li><a href="browseFound">Browse Found</a></li>
                         
                         
                     </ul>
@@ -108,16 +109,15 @@
             </div>
             <br><br>
             <div class="jumbotron">
-                <h2><b>Welcome!</b></h2>
-                <p-2>Search for a specific item below, or click one of the tabs above to make a new post or browse existing posts.</p-2>
+                <h2><b>Welcome to the Lost Bin!</b></h2>
+                <p-2>Looking for something? Search for a specific item below, or click one of the tabs above to make a new post or browse existing posts.</p-2>
                 <br><br>
             </div>
             
             
             <!--############## Displays search field ##############-->
-            <h3>Search for an item:</h3>
-            <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." />
-            <button id="search">Search</button>
+            <input type="text" id="search_query" name="search_query" placeholder="Search for an item..." style="width: 375px; height: 50px; font-size: 25; padding: 10px"/>
+            <!-- <button id="search">Search</button> -->
         </div>
         
         <!--############## Displays search results ##############-->
@@ -127,7 +127,7 @@
             </div>
         </div>
         
-        <!--############## Displays new post submission form ##############-->
+        <!--############## Displays footer information ##############-->
         <div class = container>
             
             <footer class="footer">

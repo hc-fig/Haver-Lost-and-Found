@@ -119,7 +119,14 @@ app.post('/submitNewPost', function(req, res) {
 		else {
 			fields.date = new Date();  // store the date
 			fields.uuid = uuid();      // give the new post a unique identifier
-			
+
+            // TODO: Check if file type is acceptable
+            fs.rename(files.item_pic.path, "test.jpg", function(err) {
+                if (err) return console.log(err);
+            });
+
+            console.log(files.item_pic.path);
+
 			// Here we store the info from the form into a file
 		    fs.appendFile("DB/user-input-data.json", "\n" + JSON.stringify(fields), function(err) {
 				if(err) {
@@ -128,7 +135,7 @@ app.post('/submitNewPost', function(req, res) {
 		    });
 		}
     });
-	
+
 	displayHTML(res, './pages/submit-a-new-post.html');
 });
 
