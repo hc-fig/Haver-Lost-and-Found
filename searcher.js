@@ -31,7 +31,7 @@ exports.search_posts = function(path, query, callback) {
 		
 		var inPost = false;
 		for (key in post) {
-			if (post[key].toLowerCase().search(query) != -1) {
+			if (post[key].toLowerCase().indexOf(query) != -1) {
 				inPost = true;
 			}
 		}

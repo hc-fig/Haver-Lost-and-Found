@@ -12,8 +12,23 @@
         <script>
             $(document).ready(function(){
                 
+                /*
                 // Handles search requests initiated by clicking the "search" button
                 $("#search").click(function(){
+                    submit_search();
+                });
+                */
+                
+                // Allows users to submit the form by hitting enter in the search field
+                $("#search_query").keyup(function(event) {
+                    //if (event.keyCode == 13 || event.which == 13) {
+                        submit_search();
+                        //return false;
+                    //}
+                });
+                
+                
+                function submit_search() {
                     
                     // Takes the current contents of the search_query box
                     var search = $("#search_query").val();
@@ -58,7 +73,7 @@
                         }
                         
                     });
-                });
+                }
                 
                 
             });
