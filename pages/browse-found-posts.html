@@ -44,12 +44,12 @@
                             
                             
                             $(".results").append(
-                                "<div class='col-md-4' style='border:10px double " + color + "';>" + 
+                                "<div class='col-md-4' style='border:9px solid " + color + "';>" + 
                                 "<h2><b>" + result.posts[i].item_name + "</b></h2>" +
                                 "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
                                 "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
-                                "<p><b> Description:</b> " + result.posts[i].description + "</p>" +
-                                "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" + 
+                                "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" +
+                                "<p><b> Description:</b> " + result.posts[i].description + "</p>" + 
                                 "<br>" +
                                 "</div>"
                                 
@@ -87,7 +87,12 @@
         
         <div class = container>
              <div class="masthead">
-                <h1><b>Haver Lost and Found</b></h1>
+                <div style='background-color: crimson; color: white; font-size: 50'>
+                    <a href='https://www.haverford.edu/'><img style='padding: 10px' src='https://www.haverford.edu/sites/default/files/Office/Communications/Haverford-College-Logo.png' alt='Haverford College Logo' /></a>
+                    <span style='float: right; padding: 30px'>
+                        <b>&nbsp Haver Lost and Found</b>
+                    </span>
+                </div>
                 
                 <nav>
                     <ul class="nav nav-justified">
