@@ -120,12 +120,14 @@ app.post('/submitNewPost', function(req, res) {
 			fields.date = new Date();  // store the date
 			fields.uuid = uuid();      // give the new post a unique identifier
 
-            // TODO: Check if file type is acceptable
-            fs.rename(files.item_pic.path, "test.jpg", function(err) {
+            // TODO: Check if file type is acceptable. Test which files types show up as what, add them to list below, check for them
+			// acceptable types: "image/jpeg",
+			console.log(files);
+
+			// Saves the image in the DB/images folder under the name of its post's unique id:
+            fs.rename(files.item_pic.path, "public/user_images/" + fields.uuid + ".jpg", function(err) {
                 if (err) return console.log(err);
             });
-
-            console.log(files.item_pic.path);
 
 			// Here we store the info from the form into a file
 		    fs.appendFile("DB/user-input-data.json", "\n" + JSON.stringify(fields), function(err) {
