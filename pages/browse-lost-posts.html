@@ -36,7 +36,7 @@
                         
                         for (var i = 0; i < result.posts.length; i++) {
                         
-                            color = "crimson";
+                            color = "#92253A";
                             if (i %2 == 0){
                                 color = "black";
                             }
@@ -44,12 +44,13 @@
                             
                             
                             $(".results").append(
-                                "<div class='col-md-4' style='border: 5px solid white; color: white; background-color: " + color + "';>" + 
+                                "<div class='col-md-4' style='border: 5px solid white; color: white; background-color: " + color + "';>" +
                                 "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
                                 "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
                                 "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
                                 "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" +
                                 "<p><b> Description:</b> " + result.posts[i].description + "</p>" +
+                                "<img style='padding-top: 8px; width: 335px; display: block; margin: auto' src='/user_images/" + result.posts[i].uuid + ".jpg' alt='' />" +
                                 "<br>" +
                                 "</div>"
                                 
@@ -87,9 +88,9 @@
         
         <div class = container>
              <div class="masthead">
-                <div style='background-color: crimson; color: white; font-size: 60; font-family: "Times New Roman"'>
+                <div style='background-color: #A60000; color: white; font-size: 60; font-family: "Times New Roman"'>
                     <a href='https://www.haverford.edu/'><img style='padding: 10px' src='/images/Haverford-College-Logo.png' alt='Haverford College Logo' /></a>
-                    <span style='float: right; padding-right: 35px; padding-top: 23px'>
+                    <span style='float: right; padding-right: 35px; padding-top: 30px'>
                         <span style="font-size: 45">The</span> Haverford Lost Bin
                     </span>
                 </div>
