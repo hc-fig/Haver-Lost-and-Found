@@ -1,10 +1,18 @@
 body {
     
 }
-col-md-4{
-    border: double;
-    border-width: 10px; 
-    
+
+
+.col-md-12:hover {
+    opacity: 0.7;
+    transition: 0.07s;
+}
+
+.col-md-12:active {
+    opacity: 0.55;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    transition: 0.1s;
 }
 
 p-2{

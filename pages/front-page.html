@@ -1,5 +1,6 @@
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
         <!-- Latest compiled and minified CSS -->
@@ -26,6 +27,16 @@
                 });
                 
                 
+                // TODO: get mouse hover events working:
+                $(".col-md-12").hover(function() {
+                    console.log("working");
+                    $(this).css('background-color', 'red');
+                },
+                function() {
+                    $(this).css('background-color', '#A60000');
+                });
+                
+                
                 function submit_search() {
                     
                     // Takes the current contents of the search_query box
@@ -48,7 +59,7 @@
                         var color;
                         for (var i = 0; i < result.posts.length; i++) {
                             
-                            color = "#92253A";
+                            color = "#A60000";
                             if (i %2 == 0){
                                 color = "black";
                             }
