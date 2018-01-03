@@ -28,23 +28,29 @@
                         
                         
                         // Formats and displays the data appropriately
-                        $(".results").append("<br><br>");
-                        $(".results").append("<div class='row'>");
+                        $(".col0").empty();
+                        $(".col1").empty();
+                        $(".col2").empty();
+                        
+                        // Formats and displays the data appropriately
+                        $(".col0").append("<br><br>");
+                        $(".col0").append("<div class='row'>");
+                        $(".col1").append("<br><br>");
+                        $(".col1").append("<div class='row'>");
+                        $(".col2").append("<br><br>");
+                        $(".col3").append("<div class='row'>");
                         var color;
-                        
-                        
-                        
                         for (var i = 0; i < result.posts.length; i++) {
-                        
+                            
                             color = "#92253A";
                             if (i %2 == 0){
                                 color = "black";
                             }
                             
                             
-                            
-                            $(".results").append(
-                                "<div class='col-md-4' style='border: 5px solid white; color: white; background-color: " + color + "';>" +
+    
+                            $(".col" + (i %3)).append(
+                                "<div class='col-md-12' style='border: 5px solid white; border-bottom: 7px solid white; color: white; background-color: " + color + "';>" +
                                 "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
                                 "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
                                 "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
@@ -108,9 +114,13 @@
             </div>
             <br>
             <h3>All Lost Posts:</h3>
-            <div class = "results">
-                
-                <br>
+            <div class = container >
+                <div class="search_results">
+                    <div class="message"></div>
+                    <div class="col0" style="width: 33%; float: left"></div>
+                    <div class="col1" style="width: 33%; float: left"></div>
+                    <div class="col2" style="width: 33%; float: left"></div>
+                </div>
             </div>
         </div>
         

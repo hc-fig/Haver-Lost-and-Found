@@ -33,11 +33,18 @@
                     
                     // Sends the info to the server, which will give us an array of matched posts
                     $.post("/search", {search_query: search}, function(result){
-                        $(".search_results").empty();
+                        $(".message").empty();
+                        $(".col0").empty();
+                        $(".col1").empty();
+                        $(".col2").empty();
                         
                         // Formats and displays the data appropriately
-                        $(".search_results").append("<br><br>");
-                        $(".search_results").append("<div class='row'>");
+                        $(".col0").append("<br><br>");
+                        $(".col0").append("<div class='row'>");
+                        $(".col1").append("<br><br>");
+                        $(".col1").append("<div class='row'>");
+                        $(".col2").append("<br><br>");
+                        $(".col3").append("<div class='row'>");
                         var color;
                         for (var i = 0; i < result.posts.length; i++) {
                             
@@ -48,8 +55,8 @@
                             
                             
     
-                            $(".search_results").append(
-                                "<div class='col-md-4' style='border: 5px solid white; color: white; background-color: " + color + "';>" +
+                            $(".col" + (i %3)).append(
+                                "<div class='col-md-12' style='border: 5px solid white; border-bottom: 7px solid white; color: white; background-color: " + color + "';>" +
                                 "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
                                 "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
                                 "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
@@ -65,8 +72,8 @@
                             
                             }
                         if (result.posts.length == 0){
-                            $(".search_results").append(
-                            "<h2>Sorry, we have no results for that search</h2>" + 
+                            $(".message").append(
+                            "<br><h2>Sorry, we have no results for that search</h2>" + 
                             "<p>Please try checking to make sure you have not mispelled your search. Also, try using a synonym such as jacket instead of coat.</p>"
                             );
                         }
@@ -81,6 +88,12 @@
             function formatDate(d) {  // d should be a Date object. Returns a string
                 return d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
             }
+            
+            // Random number helper function
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min) ) + min;
+            }
+            
         </script>
         
     </head>
@@ -123,7 +136,10 @@
         <!--############## Displays search results ##############-->
         <div class = container >
             <div class="search_results">
-            <br> <!-- this will be replaced by a post display when the user clicks the search button-->
+                <div class="message"></div>
+                <div class="col0" style="width: 33%; float: left"></div>
+                <div class="col1" style="width: 33%; float: left"></div>
+                <div class="col2" style="width: 33%; float: left"></div>
             </div>
         </div>
         
