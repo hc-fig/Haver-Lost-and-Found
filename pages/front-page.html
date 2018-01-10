@@ -14,86 +14,79 @@
             $(document).ready(function(){
                 submit_search();
                 
-                /*
-                // Handles search requests initiated by clicking the "search" button
-                $("#search").click(function(){
-                    submit_search();
-                });
-                */
+                
                 
                 // Continuously submits a search after each character typed into the search box
                 $("#search_query").on("input", function() {
                     submit_search();
                 });
                 
-                
-                // TODO: get mouse hover events working:
-                $(".col-md-12").hover(function() {
-                    console.log("working");
-                    $(this).css('background-color', 'red');
-                },
-                function() {
-                    $(this).css('background-color', '#A60000');
-                });
-                
-                
-                function submit_search() {
-                    
-                    // Takes the current contents of the search_query box
-                    var search = $("#search_query").val();
-                    
-                    // Sends the info to the server, which will give us an array of matched posts
-                    $.post("/search", {search_query: search}, function(result){
-                        $(".message").empty();
-                        $(".col0").empty();
-                        $(".col1").empty();
-                        $(".col2").empty();
-                        
-                        // Formats and displays the data appropriately
-                        $(".col0").append("<br><br>");
-                        $(".col0").append("<div class='row'>");
-                        $(".col1").append("<br><br>");
-                        $(".col1").append("<div class='row'>");
-                        $(".col2").append("<br><br>");
-                        $(".col3").append("<div class='row'>");
-                        var color;
-                        for (var i = 0; i < result.posts.length; i++) {
-                            
-                            color = "#A60000";
-                            if (i %2 == 0){
-                                color = "black";
-                            }
-                            
-                            
-    
-                            $(".col" + (i %3)).append(
-                                "<div class='col-md-12' style='border: 5px solid white; border-bottom: 7px solid white; color: white; background-color: " + color + "';>" +
-                                "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
-                                "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
-                                "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
-                                "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" +
-                                "<p><b> Description:</b> " + result.posts[i].description + "</p>" +
-                                "<img style='padding-top: 8px; width: 335px; display: block; margin: auto' src='/user_images/" + result.posts[i].uuid + ".jpg' alt='' />" +
-                                "<br>" +
-                                "</div>"
-                                
-                                
-                            );
-                               
-                            
-                            }
-                        if (result.posts.length == 0){
-                            $(".message").append(
-                            "<br><h2>Sorry, we have no results for that search</h2>" + 
-                            "<p>Please try checking to make sure you have not mispelled your search. Also, try using a synonym such as jacket instead of coat.</p>"
-                            );
-                        }
-                        
-                    });
-                }
-                
-                
             });
+            
+            
+            // ############ HELPER FUNCTIONS ############
+            function submit_search() {
+                    
+                // Takes the current contents of the search_query box
+                var search = $("#search_query").val();
+
+                // Sends the info to the server, which will give us an array of matched posts
+                $.post("/search", {search_query: search}, function(result){
+                    $(".message").empty();
+                    $(".col0").empty();
+                    $(".col1").empty();
+                    $(".col2").empty();
+
+                    // Formats and displays the data appropriately
+                    $(".col0").append("<br><br>");
+                    $(".col0").append("<div class='row'>");
+                    $(".col1").append("<br><br>");
+                    $(".col1").append("<div class='row'>");
+                    $(".col2").append("<br><br>");
+                    $(".col3").append("<div class='row'>");
+
+                    var color;
+                    for (var i = 0; i < result.posts.length; i++) {
+
+                        color = "#A60000";
+                        if (i %2 == 0){
+                            color = "black";
+                        }
+
+
+                        $(".col" + (i %3)).append(
+                            "<div id='post" + i + "' class='col-md-12' onmouseup='postMouseUp(" + i + ")' style='border: 5px solid white; border-bottom: 7px solid white; color: white; background-color: " + color + "';>" +
+                            "<h2><b>" + result.posts[i].item_name.substring(0, 1).toUpperCase() + result.posts[i].item_name.substring(1) + "</b></h2>" +
+                            "<p><b> Username:</b> " + result.posts[i].username + "</p>" + 
+                            "<p><b> Type:</b> " + result.posts[i].postType + "</p>" + 
+                            "<p><b> Date added:</b> " + formatDate(new Date(result.posts[i].date)) + "</p>" +
+                            "<p class='description'><b> Description:</b> " + result.posts[i].description + "</p>" +
+                            "<img style='padding-top: 8px; width: 100%; display: block; margin: auto' src='/user_images/" + result.posts[i].uuid + ".jpg' onError='this.style.display=\"none\"' />" +
+                            "<br>" +
+                            "</div>"
+                        );
+                    }
+
+
+                    if (result.posts.length == 0){
+                        $(".message").append(
+                        "<br><h2>Sorry, we have no results for that search</h2>" + 
+                        "<p>Please try checking to make sure you have not mispelled your search. Also, try using a synonym such as jacket instead of coat.</p>"
+                        );
+                    }
+                });
+            }
+            
+            // Handles mouseups on posts (i.e. allows users to expand a post by clicking on it).
+            // n should be an int representing the post that's been clicked
+            function postMouseUp(n) {
+                
+                $('.col-md-12 > .description').animate({'padding-bottom': '0px'}, {duration: 70, queue: false});
+                $('.col-md-12 > .description').css('white-space', 'nowrap');
+                
+                $('#post' + n + " > .description").animate({'padding-bottom': '20px'}, {duration: 100, queue: false});
+                $('#post' + n + " > .description").css('white-space', 'normal');
+            }
             
             // Helper function for formatting dates using slash notation
             function formatDate(d) {  // d should be a Date object. Returns a string
