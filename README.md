@@ -8,6 +8,8 @@ NOTE: This site is not yet being run on a permanent web server! To access the si
 
 USAGE INSTRUCTIONS:
 1) Make sure you have node.js installed on your machine (download: https://nodejs.org/en/download/)
-2) Install packages with npm (open the terminal and type in `npm install`)
-3) Download this repository and run the "run_server.bat" file
+2) Download this repository
+3) Open the terminal and navigate to the repository folder
+4) Install dependencies with npm (type in `npm install`)
+5) Run the server (type in `node server.js`)
 4) Navigate to http://localhost:8080/ in your web browser to view the webpage!
