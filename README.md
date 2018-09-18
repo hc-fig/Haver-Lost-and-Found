@@ -12,7 +12,8 @@ USAGE INSTRUCTIONS:
 3) Open the terminal and navigate to the repository folder
 4) Install dependencies with npm (type in `npm install`)
 5) Run the server (type in `node server.js`)
-6) Navigate to http://localhost:8080/ in your web browser to view the webpage!
+6) Navigate to http://localhost:8080/ in your web browser to view the webpage! You should see a page like the one in the picture below.
+
 
 # Preview of the Homepage:
 ![homepage preview](homepage.png)
