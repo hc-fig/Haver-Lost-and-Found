@@ -14,6 +14,5 @@ USAGE INSTRUCTIONS:
 5) Run the server (type in `node server.js`)
 6) Navigate to http://localhost:8080/ in your web browser to view the webpage!
 
-
+# Preview of the Homepage:
 ![homepage preview](homepage.png)
-![homepage preview](https://raw.githubusercontent.com/pthiel157/Haver-Lost-and-Found/master/homepage.png)
