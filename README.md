@@ -1,5 +1,5 @@
 # Haver-Lost-and-Found
-A lost and found site for use at Haverford College, available [here](http://haverlostandfound-env.4aqm3pzj9q.us-east-2.elasticbeanstalk.com)
+A lost and found site for use at Haverford College, available online [here](http://haverlostandfound-env.4aqm3pzj9q.us-east-2.elasticbeanstalk.com).
 
 The main files of the project are server.js and front-page.html (the latter of which is located in the "pages" folder)
 
